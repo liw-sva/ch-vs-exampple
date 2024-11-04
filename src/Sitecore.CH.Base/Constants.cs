@@ -174,11 +174,6 @@
                 public static string SetMaster = "setmaster";
                 public static string SetDeliverablesLifeCycleStatus = "set.deliverables.lifecyclestatus";
             }
-            public static class args
-            {
-                public static string master_relation = "MasterFile";
-
-            }
         }
 
         public static class Api

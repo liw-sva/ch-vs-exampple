@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Sitecore.CH.Implementation.AzFunctions.Dependencies;
+// using Sitecore.CH.Implementation.AzFunctions.Dependencies;
 using Sitecore.CH.Implementation.Dependencies;
 
 namespace Sitecore.CH.Implementation.Tests
@@ -13,7 +13,7 @@ namespace Sitecore.CH.Implementation.Tests
             
             base.AddServices(serviceCollection);
             serviceCollection.AddImplementationServices();
-            serviceCollection.AddAzFunctionServices();
+   //         serviceCollection.AddAzFunctionServices();
         }
         protected override IConfigurationBuilder GetOverrides(IConfigurationBuilder configurationBuilder)
         {
