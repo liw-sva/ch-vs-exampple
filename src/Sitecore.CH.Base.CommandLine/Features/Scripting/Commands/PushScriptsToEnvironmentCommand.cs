@@ -28,9 +28,9 @@ namespace Sitecore.CH.Base.CommandLine.Commands.Features.Scripting.Commands
 
         public override int Run(string[] remainingArguments)
         {
-            Validate();
-            OnExecuteAsync().WaitAndUnwrapException();
-            return Success;
+            // Validate();
+            // OnExecuteAsync().WaitAndUnwrapException();
+            return 1; // Success;
         }
 
         private void Validate()

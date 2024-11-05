@@ -2,7 +2,7 @@
   "profiles": {
     "Sitecore.CH.Implementation.CommandLine": {
       "commandName": "Project",
-      "commandLineArgs": "push-scripts-to-environment -scripts=all -create-action"
+      "commandLineArgs": "SetRestricted"
     }
   }
 }
