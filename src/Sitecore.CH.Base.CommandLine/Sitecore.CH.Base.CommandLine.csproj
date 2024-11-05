@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Features\CRUD\Commands\**" />
+    <EmbeddedResource Remove="Features\CRUD\Commands\**" />
+    <None Remove="Features\CRUD\Commands\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Features\Scripting\Resources\ActionScriptTemplate.template" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="ManyConsole" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="NLog" Version="4.7.4" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.6.5" />
+    <PackageReference Include="Stylelabs.M.Scripting.Types" Version="4.2.3" />
+    <PackageReference Include="Stylelabs.M.Sdk.WebClient" Version="4.2.34" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sitecore.CH.Base\Sitecore.CH.Base.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Features\Scripting\Resources\Scripting.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Scripting.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Features\Scripting\Resources\Scripting.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Scripting.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\CRUD\" />
+  </ItemGroup>
+</Project>

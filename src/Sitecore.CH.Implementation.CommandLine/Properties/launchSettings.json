@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Sitecore.CH.Implementation.CommandLine": {
+      "commandName": "Project",
+      "commandLineArgs": "SetRestricted"
+    }
+  }
+}

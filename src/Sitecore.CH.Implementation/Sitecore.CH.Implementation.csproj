@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sitecore.CH.Base\Sitecore.CH.Base.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Sample\Domain\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Stylelabs.M.Scripting.Types" Version="4.2.3" />
+    <PackageReference Include="Stylelabs.M.Sdk.WebClient" Version="4.2.34" />
+  </ItemGroup>
+</Project>
