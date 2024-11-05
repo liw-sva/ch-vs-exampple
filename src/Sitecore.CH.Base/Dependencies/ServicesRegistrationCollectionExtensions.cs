@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Sitecore.CH.Base.Features.Base.Services;
-using Sitecore.CH.Base.Features.CRUD.Services;
+// using Sitecore.CH.Base.Features.CRUD.Services;
 using Sitecore.CH.Base.Features.Logging.Services;
 using Sitecore.CH.Base.Features.Sample.Services;
 using Sitecore.CH.Base.Features.Security.Services;
@@ -20,7 +20,7 @@ namespace Sitecore.CH.Base.Dependencies
             collection.AddTransient<IBaseEntityService, BaseEntityService>();
             collection.AddTransient(typeof(ILoggerService<>), typeof(LoggerService<>));
             collection.AddScoped<ILoggingContextService, LoggingContextService>();
-            collection.AddTransient<IMassDeleteJobService, MassDeleteJobService>();
+        //    collection.AddTransient<IMassDeleteJobService, MassDeleteJobService>();
             collection.AddTransient<IBaseJobService, BaseJobService>();
             collection.AddScoped<ISecurityService, SecurityService>();
             return collection;

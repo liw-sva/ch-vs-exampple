@@ -24,7 +24,6 @@ namespace Sitecore.CH.Base.Features.Sample.Services
 
         public async Task RunAsync()
         {
-
             var client = _mClientFactory.Client;
             var sampleUserNameToQuery = "superuser";
             var id = await client.Users.GetUserIdAsync(sampleUserNameToQuery).ConfigureAwait(false);

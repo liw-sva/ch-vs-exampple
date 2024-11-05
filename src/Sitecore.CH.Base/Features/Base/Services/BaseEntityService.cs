@@ -9,18 +9,20 @@ using Stylelabs.M.Base.Querying;
 using Stylelabs.M.Base.Querying.Linq;
 using Stylelabs.M.Base.Web.Api.Models;
 using Stylelabs.M.Framework.Essentials.LoadConfigurations;
-using Stylelabs.M.Framework.Utilities;
+// using Stylelabs.M.Framework.Utilities;
 using Stylelabs.M.Sdk.Contracts.Base;
 using Stylelabs.M.Sdk.Contracts.Querying.Generic;
 using Stylelabs.M.Sdk.WebClient;
 using Stylelabs.M.Sdk.WebClient.Http;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Stylelabs.M.Sdk.Models.Content;
 
 namespace Sitecore.CH.Base.Features.Base.Services
 {
@@ -36,7 +38,7 @@ namespace Sitecore.CH.Base.Features.Base.Services
         Task<long?> GetEntityIdAsync(string identifier);
 
         Task<List<BusinessAuditLogEntry>> ExecuteBusinessAuditLogQuery(long? targetId, string eventType = null, bool useScroll = false);
-        Task<bool> SetDeliverablesLifeCycleStatus(long entityId, string status, string statusRelation, string reasonProperty, string reason = "");
+      //  Task<bool> SetDeliverablesLifeCycleStatus(long entityId, string status, string statusRelation, string reasonProperty, string reason = "");
 
         /// <summary>
         /// Helper method to workaround CS0211206
@@ -47,14 +49,14 @@ namespace Sitecore.CH.Base.Features.Base.Services
         /// <param name="cardinality"></param>
         /// <param name="parentEntityIdToAppend"></param>
         /// <returns></returns>
-        Task AppendParentRelationUsingRawApiCall(long childEntityId, string relationName, Cardinality cardinality, long parentEntityIdToAppend);
+      //  Task AppendParentRelationUsingRawApiCall(long childEntityId, string relationName, Cardinality cardinality, long parentEntityIdToAppend);
 
         Task<long?> CopyEntity(long? id, EntityCopyOptions entityCopyOptions);
-        Task<EntityRolesResource> GetRolesAsync(long id);
-        Task<bool> SetUserRoleAsync(long entityId, long userId, string Role);
+        // Task<EntityRolesResource> GetRolesAsync(long id);
+       // Task<bool> SetUserRoleAsync(long entityId, long userId, string Role);
 
         Task<Link> GetEntityLinkAsync(long value);
-        Task SetRolesAsync(long entityId, Dictionary<string, List<Link>> userRoles, Dictionary<string, List<Link>> userGroupRoles);
+      //  Task SetRolesAsync(long entityId, Dictionary<string, List<Link>> userRoles, Dictionary<string, List<Link>> userGroupRoles);
     }
 
     public class BaseEntityService : IBaseEntityService
@@ -184,9 +186,18 @@ namespace Sitecore.CH.Base.Features.Base.Services
 
         public async Task<List<long>> GetEntityIdsAsync(string definitionName, string identifierProperty, List<string> identifierValues)
         {
-            Guard.NotNullOrEmpty(nameof(definitionName), definitionName);
-            Guard.NotNullOrEmpty(nameof(identifierProperty), identifierProperty);
-            Guard.NotNull(nameof(identifierValues), identifierValues);
+            if (string.IsNullOrEmpty(definitionName))
+            {
+                throw new ArgumentNullException(nameof(definitionName), "The definition name cannot be null or empty.");
+            }
+            if (string.IsNullOrEmpty(identifierProperty))
+            {
+                throw new ArgumentNullException(nameof(identifierProperty), "The identifier property cannot be null or empty.");
+            }
+            if (identifierValues == null)
+            {
+                throw new ArgumentNullException(nameof(identifierValues), "The identifier values cannot be null.");
+            }
 
             var client = _mClientFactory.Client;
             var query = Query.CreateIdsQuery(entities =>
@@ -202,9 +213,18 @@ namespace Sitecore.CH.Base.Features.Base.Services
 
         public async Task<long?> GetEntityIdAsync(string definitionName, string identifierProperty, string identifierValue)
         {
-            Guard.NotNullOrEmpty(nameof(definitionName), definitionName);
-            Guard.NotNullOrEmpty(nameof(identifierProperty), identifierProperty);
-            Guard.NotNullOrEmpty(nameof(identifierValue), identifierValue);
+            if (string.IsNullOrEmpty(definitionName))
+            {
+                throw new ArgumentNullException(nameof(definitionName), "The definition name cannot be null or empty.");
+            }
+            if (string.IsNullOrEmpty(identifierProperty))
+            {
+                throw new ArgumentNullException(nameof(identifierProperty), "The identifier property cannot be null or empty.");
+            }
+            if (string.IsNullOrEmpty(identifierValue))
+            {
+                throw new ArgumentNullException(nameof(identifierValue), "The identifier value cannot be null or empty.");
+            }
 
             var client = _mClientFactory.Client;
             var query = Query.CreateIdsQuery(entities =>
@@ -218,6 +238,7 @@ namespace Sitecore.CH.Base.Features.Base.Services
             return result;
         }
 
+        /*
         public async Task<EntityRolesResource> GetRolesAsync(long id)
         {
             var client = _mClientFactory.Client;
@@ -236,9 +257,10 @@ namespace Sitecore.CH.Base.Features.Base.Services
 
             return JsonConvert.DeserializeObject<EntityRolesResource>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
         }
+        */
 
 
-        public async Task AppendParentRelationUsingRawApiCall(long childEntityId, string relationName, Cardinality cardinality, long parentEntityIdToAppend)
+        /*public async Task AppendParentRelationUsingRawApiCall(long childEntityId, string relationName, Cardinality cardinality, long parentEntityIdToAppend)
         {
             var client = _mClientFactory.Client;
             var routes = await client.Api.GetApiRoutesAsync().ConfigureAwait(false);
@@ -277,7 +299,7 @@ namespace Sitecore.CH.Base.Features.Base.Services
             }
             var putResponse = await client.Raw.PutAsync(relationsLink, new JsonContent(relation)).ConfigureAwait(false);
             putResponse.EnsureSuccessStatusCode();
-        }
+        }*/
 
         public async Task<long?> CopyEntity(long? id, EntityCopyOptions entityCopyOptions)
         {
@@ -302,7 +324,7 @@ namespace Sitecore.CH.Base.Features.Base.Services
             return long.Parse(response.Headers.Location.Segments.LastOrDefault());
         }
 
-        public async Task<bool> SetUserRoleAsync(long entityId, long userId, string role)
+        /*public async Task<bool> SetUserRoleAsync(long entityId, long userId, string role)
         {
             bool userAdded = false;
             var client = _mClientFactory.Client;
@@ -322,9 +344,9 @@ namespace Sitecore.CH.Base.Features.Base.Services
             }
             return userAdded;
 
-        }
+        }*/
 
-        public async Task SetRolesAsync(long entityId, Dictionary<string, List<Link>> userRoles, Dictionary<string, List<Link>> userGroupRoles)
+        /*public async Task SetRolesAsync(long entityId, Dictionary<string, List<Link>> userRoles, Dictionary<string, List<Link>> userGroupRoles)
         {
             Guard.NotNull(nameof(userRoles), userRoles);
             Guard.NotNull(nameof(userGroupRoles), userGroupRoles);
@@ -341,9 +363,9 @@ namespace Sitecore.CH.Base.Features.Base.Services
             await client.Commands.ExecuteCommandAsync(Sitecore.CH.Base.Constants.Commands.NameSpace.Security,
                Constants.Commands.Command.SetRoles, JObject.FromObject(roles)).ConfigureAwait(false);
 
-        }
+        }*/
 
-        public async Task<bool> SetDeliverablesLifeCycleStatus(long entityId, string status, string statusRelation, string reasonProperty, string reason = "")
+        /*public async Task<bool> SetDeliverablesLifeCycleStatus(long entityId, string status, string statusRelation, string reasonProperty, string reason = "")
         {
             try
             {
@@ -368,7 +390,7 @@ namespace Sitecore.CH.Base.Features.Base.Services
                 _logger.LogError(ex, ex.Message + " " + ex.StackTrace);
             }
             return false;
-        }
+        }*/
 
         public async Task<Link> GetEntityLinkAsync(long value)
         {

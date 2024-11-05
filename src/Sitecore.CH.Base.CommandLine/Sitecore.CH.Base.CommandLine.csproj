@@ -5,7 +5,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Features\Scripting\Resources\ActionScriptTemplate.template" />
+    <Compile Remove="Features\CRUD\Commands\**" />
+    <EmbeddedResource Remove="Features\CRUD\Commands\**" />
+    <None Remove="Features\CRUD\Commands\**" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Features\Scripting\Resources\ActionScriptTemplate.template" />
@@ -20,6 +22,8 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="NLog" Version="4.7.4" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.6.5" />
+    <PackageReference Include="Stylelabs.M.Scripting.Types" Version="4.2.3" />
+    <PackageReference Include="Stylelabs.M.Sdk.WebClient" Version="4.2.34" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sitecore.CH.Base\Sitecore.CH.Base.csproj" />
@@ -36,5 +40,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Scripting.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\CRUD\" />
   </ItemGroup>
 </Project>

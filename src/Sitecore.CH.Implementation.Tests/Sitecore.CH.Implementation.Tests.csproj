@@ -5,9 +5,16 @@
     <UserSecretsId>76918688-9681-49c4-920b-5140589be663</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Tests\Scripts\**" />
+    <EmbeddedResource Remove="Tests\Scripts\**" />
+    <None Remove="Tests\Scripts\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.14.7" />
+    <PackageReference Include="Stylelabs.M.Scripting.Types" Version="4.2.3" />
+    <PackageReference Include="Stylelabs.M.Sdk.WebClient" Version="4.2.34" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="coverlet.collector" Version="1.2.0" />

@@ -9,7 +9,6 @@ using Sitecore.CH.Base.Features.SDK.Services.Config;
 using Stylelabs.M.Base.Querying;
 using Stylelabs.M.Base.Querying.Linq;
 using Stylelabs.M.Framework.Essentials.LoadConfigurations;
-using Stylelabs.M.Framework.Utilities;
 using Stylelabs.M.Sdk.Contracts.Base;
 using System;
 using System.Collections.Generic;
@@ -97,7 +96,7 @@ namespace Sitecore.CH.Base.Features.CRUD.Services
 
         private async Task CreateDeleteJobsInternal(IEnumerable<EntityDelete> entitiesToDelete, string definitionName, Action<IEnumerable<EntityDelete>> storeAction)
         {
-            Guard.NotNullOrEmpty(nameof(definitionName), definitionName);
+            // Guard.NotNullOrEmpty(nameof(definitionName), definitionName);
             var client = _mClientFactory.Client;
             var results = await FilterForRelevant(entitiesToDelete, definitionName).ConfigureAwait(false);
 

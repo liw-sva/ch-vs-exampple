@@ -2,7 +2,7 @@ using ManyConsole;
 using Sitecore.CH.Base.Features.Logging.Services;
 using Sitecore.CH.Base.Features.SDK.Services;
 using Sitecore.CH.Implementation.CommandLine.Features.CuratedView.Services;
-using Stylelabs.M.Portal.Web.Api.Models;
+
 
 namespace Sitecore.CH.Implementation.CommandLine.Features.CuratedView.Commands;
 

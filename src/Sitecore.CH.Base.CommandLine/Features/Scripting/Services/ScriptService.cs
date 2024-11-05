@@ -7,13 +7,13 @@ using Stylelabs.M.Base.Querying;
 using Stylelabs.M.Base.Querying.Filters;
 using Stylelabs.M.Framework.Essentials.LoadConfigurations;
 using Stylelabs.M.Framework.Essentials.LoadOptions;
-using Stylelabs.M.Framework.Utilities;
 using Stylelabs.M.Sdk.Contracts.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sitecore.CH.Base.Features.Base.Extensions;
 
 namespace Sitecore.CH.Base.CommandLine.Commands.Features.Scripting.Services
 {
@@ -187,7 +187,7 @@ namespace Sitecore.CH.Base.CommandLine.Commands.Features.Scripting.Services
 
         private async Task EnableOrDisableTriggers(IEnumerable<long> triggerIds, bool enableFlagForTriggers)
         {
-            var triggerBatch = triggerIds.Batch(50);
+            var triggerBatch = triggerIds.SplitIntoBatches(50);
             var client = _mClientFactory.Client;
             const string IsEnabledPropertyName = Base.Constants.EntityDefinitions.Trigger.Properties.IsEnabled;
             const string NamePropertyName = Base.Constants.EntityDefinitions.Trigger.Properties.Name;
